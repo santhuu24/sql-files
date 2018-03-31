@@ -1,0 +1,90 @@
+6.1)
+Insert rows with the following data into the Customer table. 6000, John, #115 Chicago, #115 Chicago, M, 25, 7878776, 10000
+•	6001, Jack, #116 France, #116 France, M, 25, 434524, 20000
+•	6002, James, #114 New York, #114 New York, M, 45, 431525, 15000.50
+Use parameter substitution.
+
+
+create table customer(
+suppid number(4),
+sname varchar2(10),
+addr1 varchar2(30),
+addr2 varchar2(30),
+gender varchar2(1) check (gender in('m','f')),
+age number(2),
+contactno number(10),
+salary number(10,2));
+
+table created.
+
+insert into customer values(&suppid,'&sname','&addr1','&addr2','&gender',&age,&contactno,&salary);
+Enter values for suppid: 6000
+Enter values for sname: john
+Enter values for addr1: #115 chicago
+Enter values for addr2: #115 chicago
+Enter values for gender: m
+Enter values for age: 25
+Enter values for contactno: 7878776
+Enter values for salary: 10000
+
+1 row created.
+
+insert into customer values(&suppid,'&sname','&addr1','&addr2','&gender',&age,&contactno,&salary);
+Enter values for suppid: 6001
+Enter values for sname: jack
+Enter values for addr1: #116 france
+Enter values for addr2: #116 france
+Enter values for gender: m
+Enter values for age: 25
+Enter values for contactno: 434524
+Enter values for salary: 20000
+
+1 row created
+
+insert into customer values(&suppid,'&sname','&addr1','&addr2','&gender',&age,&contactno,&salary);
+Enter values for suppid: 6002
+Enter values for sname: james
+Enter values for addr1: #114 new york
+Enter values for addr2: #114 new york
+Enter values for gender: m
+Enter values for age: 45
+Enter values for contactno: 431525
+Enter values for salary: 15000.50
+
+
+1 row created
+
+
+
+2)
+Create a Savepoint named ‘SP1’ after third record in the Customer table .
+
+
+savepoint sp1;
+
+savepoint created;
+
+
+3)
+Insert the below row in the Customer table. 
+6003, John, #114 Chicago, #114 Chicago, M, 45, 439525, 19000.60
+
+
+insert into customer values(&suppid,'&sname','&addr1','&addr2','&gender',&age,&contactno,&salary);
+Enter values for suppid: 6003
+Enter values for sname: john
+Enter values for addr1: #114 chicago
+Enter values for addr2: #114 chicago
+Enter values for gender: m
+Enter values for age: 45
+Enter values for contactno: 439525
+Enter values for salary: 1900.60
+
+1 row created.
+
+4)
+Execute rollback statement in such a way that whatever manipulations done before Savepoint sp1 are permanently implemented, and the ones after Savepoint SP1 are not stored as a part of the Customer table. 
+
+select * from customer;
+
+
